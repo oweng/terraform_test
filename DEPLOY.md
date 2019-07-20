@@ -12,7 +12,13 @@ I tried to comment as much as possible in the code as to where my thought proces
 
 ### Terraform Setup:
 
-To begin, The first thing to do is to setup a bucket for storing the Terraform State.  Due to collaboration as well as keeping things safe, I like to use a combination of S3 and Dynamodb to make sure state can't be altered while multiple people could be deploying. `cd terraform_test/main`
+To begin, The first thing to do is to setup a bucket for storing the Terraform State.  Due to collaboration as well as keeping things safe, I like to use a combination of S3 and Dynamodb to make sure state can't be altered while multiple people could be deploying. these main.tf's would need to be edited for the "bucket":
+```terraform_test/global/main.tf
+terraform_test/beanstalk/docker/main.tf
+terraform_test/beanstalk/ec2/main.tf
+terraform_test/iam/groups/observers.tf
+terraform_test/iam/users/john_doe.tf
+```
 
 Variables needed to be set in global/main.tf|values
 --------------------------------------------|------
