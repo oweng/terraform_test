@@ -1,0 +1,14 @@
+{
+  "AWSEBDockerrunVersion": "1",
+  "Image": {
+    "Name": "830611919119.dkr.ecr.us-east-1.amazonaws.com/node_app:latest",
+    "Update": "true"
+  },
+  "Ports": [
+    {
+      "ContainerPort": "3000"
+    }
+  ],
+  "Volumes": [],
+  "Logging": "/var/log/docker-test"
+}
