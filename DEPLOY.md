@@ -35,7 +35,7 @@ terraform apply
 ### Terraform Beanstalk EC2:
 Deployment of the EC2 environment is pretty straight forward.  The node code is inside the `source` directory for this deployment.  I set it up to zip the code up and then deploy basically from S3 while the stack is being built.  If you want to update the code, you can make your changes there, but then you also need to change the `beanstalk_module_application_version` var below. `cd terraform_test/beanstalk/ec2`
 
-###### Variables:
+#### Variables:
 Variable name|defaults/value(s)|Explanation
 -------------|-------|-----------
 eb_s3_bucket|(name of s3 bucket)|s3 bucket for elasticbeanstalk deployment
@@ -66,7 +66,7 @@ Output of the Applcation name, environment, and web URL should be printed to you
 ### Terraform Beanstalk Docker:
 Deployment of the Docker environment is pretty straight forward as well.  The main difference is the source code is not in the terraform code directory.  Since it's a container, we would need to push the updated container to ECR prior to trying to redeploy.  in the `source` directory instead is a file `Dockerrun.aws.json` that controls the deployment of where and what container to use. `cd terraform_test/beanstalk/docker`
 
-###### Variables:
+#### Variables:
 Variable name|defaults/value(s)|Explanation
 -------------|-------|-----------
 eb_s3_bucket|(name of s3 bucket)|s3 bucket for elasticbeanstalk deployment
@@ -100,7 +100,7 @@ I didn't create a module for this just because of the sensitivity of IAM in my o
 1. create user
 2. create group and policy (this is done in the same main.tf)
 
-###### Creating the user
+#### Creating the user
 In this case I like to make sure, even if it's a copy, that everything in the file is exactly what I want.  That being said, I just created a single "john_doe" user and using my own pgp public key (this needs to be echo'd through base64 to be used in the Terraform code) to get the password.  Otherwise, same as above, you will see the code at the top for this to be written to it's own state file, so `cd terraform_test/iam/users`, then it's just:
 ```
 terraform init
@@ -109,7 +109,7 @@ terraform apply
 ```
 Output of the pgp encrypted password will be displayed to your screen.
 
-###### Creating the Group and IAM Policy for the group
+#### Creating the Group and IAM Policy for the group
 I am getting long winded here..  I have seen IAM policies/roles/groups get out of hand (couple hunder files in a single directory).  So in this case, I thought it might be best to keep the policy specific for this group to be in the same main.tf as the group creation.  This way it cuts down on the clutter and hopefully will make things easier to find.  Like the IAM user, `cd terraform_test/iam/groups` then:
 ```
 terraform init
